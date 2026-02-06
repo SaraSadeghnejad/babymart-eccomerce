@@ -47,12 +47,32 @@ const userSchema = mongoose.Schema(
         },
       },
     ],
+    wishList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+    cart: [
+      {
+        productId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
- }
+};
 userSchema.pre("save", async function (next) {
   if (!this.isModified(password)) {
     next();
