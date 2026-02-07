@@ -5,6 +5,11 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import userRoutes from "./routes/userRoutes.js";
+import brandRoutes from "./routes/brandRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+
+import productRoutes from "./routes/productRoute.js";
+
 import swaggerUi from 'swagger-ui-express';
 import {specs} from "./config/swagger.js"
 // Load env vars
@@ -60,7 +65,10 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 // Routes
 app.use("/api/auth", authRoute);
-app.use("/api/users",userRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/products", productRoutes)
+app.use("/api/brands", brandRoutes);
+app.use("/api/categories", categoryRoutes);
 // API Documentation
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs, {
   explorer: true,
