@@ -1,5 +1,5 @@
 import Brand from "../models/brandModel.js";
-
+import asyncHandler from "express-async-handler";
 const getBrands = asyncHandler(async (req, res) => {
   const brands = await Brand.find({});
   res.json(brands);

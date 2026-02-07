@@ -1,14 +1,15 @@
 import express from "express";
-import { protect, admin } from "../middleware/authMiddleware.js";
 import {
+  getBrands,
+  getBrandById,
   createBrand,
   updateBrand,
-  getBrandById,
-  getBrands,
   deleteBrand,
 } from "../controllers/brandController.js";
+import { protect, admin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
+
 router.route("/").get(getBrands).post(protect, admin, createBrand);
 
 router
